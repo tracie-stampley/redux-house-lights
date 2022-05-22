@@ -1,39 +1,61 @@
-.App {
-  text-align: center;
+.house {
+  display: grid;
+  border: 1px solid #000;
+  grid-gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "title title master-switch"
+                       "room-1 room-2 room-3"
+                       "room-1-switch room-2-switch room-3-switch";
+  margin: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+  grid-area: title;
+  font-size: 200%;
+  padding: 10px 0 0 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+.master-switch {
+  grid-area: master-switch;
+  margin-top: 15px;
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.room-1 {
+  grid-area: room-1;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.room-2 {
+  grid-area: room-2;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.room-3 {
+  grid-area: room-3;
+}
+
+.room-1-switch {
+ grid-area: room-1-switch;
+  margin-bottom: 15px;
+}
+
+.room-2-switch {
+  grid-area: room-2-switch;
+}
+
+.room-3-switch {
+  grid-area: room-3-switch;
+}
+
+.light-on {
+  background-color: #fff200;
+  color: #000;
+  padding: 20px;
+  font-size: 150%;
+}
+
+.light-off {
+  background-color: #444;
+  color: #fff;
+  padding: 20px;
+  font-size: 150%;
 }
