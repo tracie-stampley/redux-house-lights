@@ -11,17 +11,21 @@ export const lightSwitchSlice = createSlice({
     name: 'lightSwitch',
     initialState,
     reducers: {
-        toggleMasterSwitch: (state) => {  
-            state.masterSwitchOn = !state.masterSwitchOn
+        toggleMasterSwitch: (state, action) => {  
+            state.masterSwitchOn = action.payload
+            lightSwitchSlice.caseReducers.toggleKitchenLight(state, action);
+            lightSwitchSlice.caseReducers.toggleLivingRoomLight(state, action);
+            lightSwitchSlice.caseReducers.toggleBedroomLight(state, action);
         },
-        toggleKitchenLight: (state) => {
-            state.kitchenLightOn = !state.kitchenLightOn
+        toggleKitchenLight: (state, action) => {
+            console.log(action)
+            state.kitchenLightOn = action.payload
         },
-        toggleLivingRoomLight: (state) => {
-            state.livingRoomLightOn = !state.livingRoomLightOn
+        toggleLivingRoomLight: (state, action) => {
+            state.livingRoomLightOn = action.payload
         },
-        toggleBedroomLight: (state) => {
-            state.bedroomLightOn = !state.bedroomLightOn
+        toggleBedroomLight: (state, action) => {
+            state.bedroomLightOn = action.payload
         }
     }
 });
