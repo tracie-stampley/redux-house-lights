@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     masterSwitchOn: false,
-    kitchenLightOn: false,
+    kitchenLightOn: true,
     livingRoomLightOn: false,
     bedroomLightOn: false
 }
@@ -18,7 +18,6 @@ export const lightSwitchSlice = createSlice({
             lightSwitchSlice.caseReducers.toggleBedroomLight(state, action);
         },
         toggleKitchenLight: (state, action) => {
-            console.log(action)
             state.kitchenLightOn = action.payload
         },
         toggleLivingRoomLight: (state, action) => {
