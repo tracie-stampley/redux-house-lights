@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     data: undefined,
-    status: 'idle',
     visible: false,
-    error: null
 }
 
 const weatherSlice = createSlice({
@@ -20,14 +18,6 @@ const weatherSlice = createSlice({
             .addCase(fetchWeatherData.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(fetchWeatherData.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.data = action.payload
-            })
-            .addCase(fetchWeatherData.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.error.message
-            })
     }
 })
 
@@ -38,8 +28,3 @@ export const selectWeatherStatus = (state) => state.weather.status
 
 export default weatherSlice.reducer
 
-export const fetchWeatherData = createAsyncThunk('weather/fetchWeatherData', async () => {
-    const response = await fetch('http://www.7timer.info/bin/api.pl?lon=-90.19789&lat=38.62727&product=civillight&output=json')
-    const body = await response.json()
-    return body
-})

@@ -12,11 +12,7 @@ import {
     selectLivingRoomLightOn,
     selectBedroomLightOn
 } from './lightSwitchSlice';
-import {
-    fetchWeatherData,
-    selectWeatherData,
-    selectWeatherStatus
-} from '../weather/weatherSlice';
+
 
 const House = () => {
     const masterSwitchOn = useSelector(selectMasterSwitchOn);
@@ -24,18 +20,10 @@ const House = () => {
     const livingRoomLightOn = useSelector(selectLivingRoomLightOn);
     const bedroomLightOn = useSelector(selectBedroomLightOn);
 
-    const weatherStatus = useSelector(selectWeatherStatus);
-    const weatherData = useSelector(selectWeatherData);
-
     const dispatch = useDispatch();
 
     const today = new Date().toDateString();
 
-    useEffect(() => {
-        if(weatherStatus === 'idle') {
-            dispatch(fetchWeatherData())
-        }
-    }, [weatherStatus, dispatch])
 
     return (
         <div className='house'>
