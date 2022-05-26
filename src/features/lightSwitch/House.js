@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Room from './Room';
 import LightSwitch from './LightSwitch';
@@ -12,6 +12,11 @@ import {
     selectLivingRoomLightOn,
     selectBedroomLightOn
 } from './lightSwitchSlice';
+import {
+    fetchWeatherData,
+    selectWeatherData,
+    selectWeatherStatus
+} from '../weather/weatherSlice';
 
 const House = () => {
     const masterSwitchOn = useSelector(selectMasterSwitchOn);
@@ -19,7 +24,18 @@ const House = () => {
     const livingRoomLightOn = useSelector(selectLivingRoomLightOn);
     const bedroomLightOn = useSelector(selectBedroomLightOn);
 
+    const weatherStatus = useSelector(selectWeatherStatus);
+    const weatherData = useSelector(selectWeatherData);
+
     const dispatch = useDispatch();
+
+    const today = new Date().toDateString();
+
+    useEffect(() => {
+        if(weatherStatus === 'idle') {
+            dispatch(fetchWeatherData())
+        }
+    }, [weatherStatus, dispatch])
 
     return (
         <div className='house'>
@@ -31,6 +47,10 @@ const House = () => {
             <LightSwitch on={kitchenLightOn} containerCssClass='room-1-switch' handleToggle={(e) => dispatch(toggleKitchenLight(e.target.checked))}/>
             <LightSwitch on={livingRoomLightOn} containerCssClass='room-2-switch' handleToggle={(e) => dispatch(toggleLivingRoomLight(e.target.checked))}/>
             <LightSwitch on={bedroomLightOn} containerCssClass='room-3-switch' handleToggle={(e) => dispatch(toggleBedroomLight(e.target.checked))}/>
+            {weatherData !== undefined && <div>
+                <div>{today}</div>
+                <div>{`High Temp: ${weatherData.dataseries[0].temp2m.max} C`}</div>
+            </div>}
         </div>
     )
 }
